@@ -21,3 +21,9 @@ Used marble [syntax from this site](https://rxjs-dev.firebaseapp.com/guide/testi
 # Improvements
 
 Feel free to use this code or add PRs.
+
+# Breadcrumbs
+
+Used:
+
+* rollup guide: https://github.com/rollup/rollup-starter-lib/tree/typescript 
