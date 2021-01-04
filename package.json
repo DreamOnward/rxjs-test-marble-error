@@ -1,6 +1,6 @@
 {
   "name": "rxjs-test-marble-error",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "rxjs test scheduler output in human readable Marble format",
   "main": "dist/rxjs-test-marble-error.cjs.js",
   "module": "dist/rxjs-test-marble-error.esm.js",
