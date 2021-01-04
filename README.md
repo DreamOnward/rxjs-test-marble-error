@@ -19,15 +19,27 @@ or
 In the test do:
 
     const comparisonFunc = (actual: any, expected: any) => expect(actual).toEqual(expected);
-    const mapping = { t: true, f: false };
-    createTestScheduler(comparisonFunc, mapping).run(helpers => {
-        const e1 = helpers.cold('----t-t-|', mapping);
-        const expected = '----t|';
+    const forwardMap = { // From marble to real value
+      't': true,
+      'f': false,
+    }
+    const reverseMap = { // from real value to marble representation
+      true: 't',
+      false: 'f',
+    }
+    createTestScheduler(comparisonFunc, reverseMap).run(helpers => {
+      const e1 = helpers.cold('--t-t-t-|', forwardMap);
+      const expected = '----t|';
 
-          const result = e1.pipe(first());
+      const result = e1.pipe(first());
 
-        helpers.expectObservable(result).toBe(expected, mapping);
+      helpers.expectObservable(result).toBe(expected, forwardMap);
     });
+
+This results in:
+
+    Expected: "----t|"
+    Received: "--t|"
 
 # Limitations
 
@@ -41,9 +53,3 @@ In the test do:
 
 Feel free to use this code or add PRs.
 I probably only use this code for a short while, so I'm not planning to maintain it.
-
-# Breadcrumbs
-
-Used:
-
-* rollup guide: https://github.com/rollup/rollup-starter-lib/tree/typescript 
