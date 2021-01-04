@@ -1,4 +1,5 @@
+export type ComparisonFunction = (actual: any, expected: any) => void;
+
 export type ReverseMapping = {
-    // @ts-ignore
-    [key: any]: string,
-}
+    [key in string | number | symbol]: string;
+};

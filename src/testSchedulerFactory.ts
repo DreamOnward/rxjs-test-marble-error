@@ -1,6 +1,7 @@
 import {TestScheduler} from "rxjs/testing";
 import {TestMessage} from "rxjs/internal/testing/TestMessage";
 import {toMarbleString} from "./messageConversion";
+import { ComparisonFunction } from "./types";
 
 /**
  * Type object as TestMessage and error if it is not
@@ -18,19 +19,19 @@ export const convertToTestMessage = (value: object): TestMessage => {
  * @note Uses Jest comparison functions syntax
  * @param mapping
  */
-export const createTestScheduler = (mapping = {}) => new TestScheduler((actual, expected) => {
+export const createTestScheduler = (comparisonFunction: ComparisonFunction, mapping = {}) => new TestScheduler((actual, expected) => {
     if (Array.isArray(actual) && Array.isArray(expected)) {
         const actualT: TestMessage[] = actual.map(convertToTestMessage);
         const expectedT: TestMessage[] = expected.map(convertToTestMessage);
 
         try {
-            expect(actual).toEqual(expected);
+            comparisonFunction(actual, expected);
         } catch (e) {
             const actualDiagram = toMarbleString(actualT, mapping);
             const expectedDiagram = toMarbleString(expectedT, mapping);
-            expect(actualDiagram).toEqual(expectedDiagram);
+            comparisonFunction(actualDiagram, expectedDiagram);
         }
     } else {
-        expect(actual).toEqual(expected);
+        comparisonFunction(actual, expected);
     }
 });

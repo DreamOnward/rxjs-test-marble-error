@@ -1,10 +1,10 @@
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
+import ts from "@wessberg/rollup-plugin-ts";
 import pkg from './package.json';
 
 const tsOptions = {
-  clean: true,
+  exclude: ["src/**/*.test.ts"],
 }
 
 export default [
@@ -19,7 +19,7 @@ export default [
     plugins: [
       resolve(),   // so Rollup can find `ms`
       commonjs(),  // so Rollup can convert `ms` to an ES module
-      typescript(tsOptions) // so Rollup can convert TypeScript to JavaScript
+      ts(tsOptions) // so Rollup can convert TypeScript to JavaScript
     ]
   },
 
@@ -33,7 +33,7 @@ export default [
     input: 'src/main.ts',
     external: ['rxjs'],
     plugins: [
-      typescript(tsOptions) // so Rollup can convert TypeScript to JavaScript
+      ts(tsOptions) // so Rollup can convert TypeScript to JavaScript
     ],
     output: [
       { file: pkg.main, format: 'cjs', exports: 'named', },

@@ -1726,23 +1726,23 @@
      * @note Uses Jest comparison functions syntax
      * @param mapping
      */
-    var createTestScheduler = function (mapping) {
+    var createTestScheduler = function (comparisonFunction, mapping) {
         if (mapping === void 0) { mapping = {}; }
         return new TestScheduler(function (actual, expected) {
             if (Array.isArray(actual) && Array.isArray(expected)) {
                 var actualT = actual.map(convertToTestMessage);
                 var expectedT = expected.map(convertToTestMessage);
                 try {
-                    expect(actual).toEqual(expected);
+                    comparisonFunction(actual, expected);
                 }
                 catch (e) {
                     var actualDiagram = toMarbleString(actualT, mapping);
                     var expectedDiagram = toMarbleString(expectedT, mapping);
-                    expect(actualDiagram).toEqual(expectedDiagram);
+                    comparisonFunction(actualDiagram, expectedDiagram);
                 }
             }
             else {
-                expect(actual).toEqual(expected);
+                comparisonFunction(actual, expected);
             }
         });
     };

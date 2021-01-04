@@ -16,8 +16,18 @@ or
 
     yarn add --dev https://github.com/DreamOnward/rxjs-test-marble-error.git
 
+In the test do:
 
+    const comparisonFunc = (actual: any, expected: any) => expect(actual).toEqual(expected);
+    const mapping = { t: true, f: false };
+    createTestScheduler(comparisonFunc, mapping).run(helpers => {
+        const e1 = helpers.cold('----t-t-|', mapping);
+        const expected = '----t|';
 
+          const result = e1.pipe(first());
+
+        helpers.expectObservable(result).toBe(expected, mapping);
+    });
 
 # Limitations
 
