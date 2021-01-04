@@ -8,6 +8,15 @@ Used marble [syntax from this site](https://rxjs-dev.firebaseapp.com/guide/testi
 
 # Usage
 
+Install
+
+    npm install --dev https://github.com/DreamOnward/rxjs-test-marble-error.git
+
+or
+
+    yarn add --dev https://github.com/DreamOnward/rxjs-test-marble-error.git
+
+
 
 
 # Limitations
@@ -21,6 +30,7 @@ Used marble [syntax from this site](https://rxjs-dev.firebaseapp.com/guide/testi
 # Improvements
 
 Feel free to use this code or add PRs.
+I probably only use this code for a short while, so I'm not planning to maintain it.
 
 # Breadcrumbs
 
